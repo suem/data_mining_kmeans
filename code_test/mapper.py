@@ -11,6 +11,7 @@ k = 100
 
 
 def print_center(c):
+    print('1\t'),
     for c_i in np.nditer(c):
         print(c_i),
     print('')
