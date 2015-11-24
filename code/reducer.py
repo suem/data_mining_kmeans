@@ -4,6 +4,9 @@
 import sys
 import numpy as np
 
+#
 for line in sys.stdin:
-    line = line.strip()
+	line = line.strip()
+	
+	#find best result
     
