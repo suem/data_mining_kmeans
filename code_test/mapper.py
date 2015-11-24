@@ -11,11 +11,7 @@ k = 100
 
 
 def print_center(c):
-<<<<<<< Updated upstream
-    print('1\t'),
-=======
     print("1\t"),
->>>>>>> Stashed changes
     for c_i in np.nditer(c):
         print(c_i),
     print('')
