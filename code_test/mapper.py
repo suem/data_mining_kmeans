@@ -11,7 +11,11 @@ k = 100
 
 
 def print_center(c):
+<<<<<<< Updated upstream
     print('1\t'),
+=======
+    print("1\t"),
+>>>>>>> Stashed changes
     for c_i in np.nditer(c):
         print(c_i),
     print('')
@@ -31,7 +35,7 @@ if __name__ == '__main__':
         features.append(np.fromstring(line, sep=' '))
     features = np.array(features).reshape((-1, D))
 
-    kmeans = KMeans(n_clusters=k, precompute_distances=False)
+    kmeans = KMeans(n_clusters=k, precompute_distances=True)
     kmeans.fit(features)
 
     print_centers(kmeans.cluster_centers_)

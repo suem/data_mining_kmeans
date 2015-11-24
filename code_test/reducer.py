@@ -27,7 +27,8 @@ if __name__ == '__main__':
 
     for line in sys.stdin:
         line = line.strip()
-        features.append(np.fromstring(line, sep=' '))
+        key, feature = line.split('\t', 1)
+        features.append(np.fromstring(feature, sep=' '))
     features = np.array(features).reshape((-1, D))
 
     kmeans = KMeans(n_clusters=k)
