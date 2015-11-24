@@ -1,1 +1,4 @@
 train/*
+code_test/mapper.txt
+code_test/train.txt
+code_test/centers.txt
