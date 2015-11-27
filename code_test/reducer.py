@@ -7,7 +7,25 @@ import numpy as np
 from sklearn.cluster import KMeans
 
 D = 500
-k = 100
+k = 10
+
+from sklearn.cluster import _k_means
+
+def update_centers(X, labels, n_clusters, distances):
+    print("X "),
+    print(X)
+    print("labels "),
+    print(labels)
+    print("n_clusters "),
+    print(n_clusters)
+    print("distances "),
+    print(distances)
+    	
+
+
+
+_k_means._centers_dense = update_centers
+_k_means._centers_sparse = update_centers
 
 
 def print_center(c):
@@ -31,6 +49,7 @@ if __name__ == '__main__':
         features.append(np.fromstring(feature, sep=' '))
     features = np.array(features).reshape((-1, D))
 
+    
     kmeans = KMeans(n_clusters=k)
     kmeans.fit(features)
 
