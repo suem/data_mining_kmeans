@@ -45,13 +45,13 @@ This problem statement is equivalent to the solution of k-means, but we were abl
 
 \paragraph{Approach and Results.\!\!\!}
 
-To solve this problem, we used SciKit Learn's integrated implementation of kmeans, which uses kmeans++ to determine starting centers and local minima.
+To solve this problem, we used SciKit Learn's integrated implementation of kmeans, which internally uses kmeans++ to generate good starting centers that help the algorithm converge faster.
 
-In our initial approach, we ran kmeans on the mappers to compute k=200 centers each, which were then all passed to the reducer, who in turn ran kmeans to reduce the number of centers to 100, which we then proceeded to output as our result. Using the right number of centers for the mappers and the reducer gave us the surprisingly high score of 9.17742.
+In our initial approach, we ran kmeans on the mappers to compute k=200 centers each, which were then all passed to the reducer, who in turn ran kmeans to reduce the number of centers to 100, which we then proceeded to output as our result. Increasing the number of centers computed by the mappers to 1000 gave us the surprisingly high score of 9.17742.
 
-This was without taking into the consideration the weights of the clusters/coresets passed by the mappers. We tried to override SciPy's kmeans update centers method, but we failed because it is defined in the binary file \verb|_k_means.x86_64-linux-gnu.so|. 
+This was without taking into the consideration the weights of the clusters/coresets passed by the mappers. We tried to override SciPy's kmeans update centers method, but we failed because it is defined in the binary file \verb|_k_means.x86_64-linux-gnu.so|. Another approach was to adapt the mapper to output each center multiple times proportionally to its weight. However, this approach didn't improve our score.
 
-In our second approach, we kept the mappers mostly the same, but we tried to take into account the weights of the centers outputted by the mappers. For this, we stopped performing kmeans in the reduce step, but instead opted for merging the points manually. For this, the reducer selected a random center and merged it with the closest other center by taking a weighted average.
+In our third approach, we kept the mappers mostly the same, but we tried to take into account the weights of the centers outputted by the mappers. For this, we stopped performing kmeans in the reduce step, but instead opted for merging the points manually. For this, the reducer selected a random center and merged it with the closest other center by taking a weighted average.
 This approach netted us with a score of 9.02585.
 
 
@@ -76,6 +76,10 @@ This approach netted us with a score of 9.02585.
 
 \paragraph{Workload distribution.\!\!\!}
 
+Alexander implemented the initial approach. At first there were some technical problems that caused his code to crash on the cluster. This issue was
+resolved by Samuel. The entire group then tried to optimize the parameters of the first approach and discussed other approaches. Nico tried to overwrite 
+SciKits internal kmeans implementation. Samuel adapted the initial solution to output centers multiple times. 
+Alexander implemented the final approach where the reducer merges the centers. Nico wrote the final report.
 
 
 
